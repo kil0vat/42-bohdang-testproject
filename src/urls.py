@@ -5,8 +5,8 @@ from django.conf.urls.defaults import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^$', 'contact.views.index', name='index'),
     # Examples:
-    # url(r'^$', 'src.views.home', name='home'),
     # url(r'^src/', include('src.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
