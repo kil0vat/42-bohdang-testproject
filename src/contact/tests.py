@@ -9,8 +9,16 @@ from django.test import TestCase
 
 
 class ContactTestCase(TestCase):
-    def test_basic_addition(self):
+    def test_index(self):
         """
-        Tests that 1 + 1 always equals 2.
+        Tests that index page exists.
         """
-        self.assertEqual(1 + 1, 2)
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+
+    def test_index_content(self):
+        """
+        Tests that data exists in the view.
+        """
+        response = self.client.get('/')
+        self.assertTrue("Artem Dudarev" in response.content)
