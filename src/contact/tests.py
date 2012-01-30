@@ -21,4 +21,4 @@ class ContactTestCase(TestCase):
         Tests that data exists in the view.
         """
         response = self.client.get('/')
-        self.assertTrue("Artem Dudarev" in response.content)
+        self.assertTrue("Artem" in response.content)
