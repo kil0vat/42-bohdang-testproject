@@ -1,10 +1,3 @@
-"""
-This file demonstrates writing tests using the unittest module. These will pass
-when you run "manage.py test".
-
-Replace this with more appropriate tests for your application.
-"""
-
 from django.test import TestCase
 
 from models import RequestsLogItem
@@ -24,3 +17,8 @@ class SimpleTest(TestCase):
         """
         self.client.get('/')
         self.assertTrue(len(RequestsLogItem.objects.all()) > 0)
+
+    def test_requests_appear(self):
+        response = self.client.get('/requests/')
+        # each request is in <li> in template
+        self.assertTrue('<li>' in response.content)
