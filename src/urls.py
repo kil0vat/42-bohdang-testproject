@@ -6,6 +6,8 @@ from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns('',
     url(r'^$', 'contact.views.index', name='index'),
+    (r'^requests/',        include('requests_log.urls')),
+
     # Examples:
     # url(r'^src/', include('src.foo.urls')),
 

@@ -1,2 +1,2 @@
 test:
-	python src/manage.py test contact
+	python src/manage.py test contact requests_log
