@@ -22,3 +22,10 @@ class SimpleTest(TestCase):
         response = self.client.get('/requests/')
         # each request is in <li> in template
         self.assertTrue('<li>' in response.content)
+
+    def test_no_more_than_ten(self):
+        number_of_requests = 11
+        for i in range(number_of_requests):
+            response = self.client.get('/requests/')
+        # each request is in <li> in template
+        self.assertTrue(response.content.count('<li>') < 11)
