@@ -1,1 +1,45 @@
-{{contact.first_name}}
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+        <img src="images/hi.jpg" />
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <!-- Le styles -->
+        <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+        <link href="{{ STATIC_URL }}css/bootstrap.responsive" rel="stylesheet">
+        <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
+
+	<title>42 Coffee Cups Test Assignment - Artem Dudarev</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="span10">
+                <h1>42 Coffee Cups Test Assignment</h1>
+                <div class="row">
+                    <div class="span5" id="first-column">
+                        <p>{{contact.first_name}}</p>
+                        <p>{{contact.last_name}}</p>
+                        <p>{{contact.birth_date}}</p>
+                        <p>Bio:</p>
+                        <p>{{contact.bio}}</p>
+                    </div>
+                    <div class="span5" id="second-column">
+                        <p>Contacts</p>
+                        <p>Email: {{contact.email}}</p>
+                        <p>Jabber: {{contact.jabber}}</p>
+                        <p>Skype: {{contact.skype}}</p>
+                        <p>Other contacts:</p>
+                        <p>{{contact.other_contacts}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
