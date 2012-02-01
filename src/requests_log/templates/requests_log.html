@@ -1,1 +1,9 @@
-Hello from requests.
+<ul>
+    {% for r in requests %}
+    <li>
+    {{ r.time }}
+    {{ r.path }}
+    {{ r.method }}
+    </li>
+    {% endfor %}
+</ul>

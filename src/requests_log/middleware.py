@@ -6,7 +6,7 @@ class RequestsLogMiddleware():
         r = RequestsLogItem(
                 path=request.path,
                 method=request.method,
-                META=request.method
+                META=request.META
                 )
         r.save()
         return None
