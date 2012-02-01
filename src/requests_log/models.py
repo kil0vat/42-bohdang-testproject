@@ -1,3 +1,8 @@
 from django.db import models
 
-# Create your models here.
+
+class RequestsLogItem(models.Model):
+    time = models.DateTimeField(auto_now_add=True)
+    path = models.CharField(max_length=2048)
+    method = models.CharField(max_length=4)
+    META = models.TextField()
