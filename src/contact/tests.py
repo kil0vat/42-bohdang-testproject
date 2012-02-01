@@ -41,3 +41,10 @@ class ContactTestCase(TestCase):
             self.assertTrue(f in response.content)
         for d in data_in_view:
             self.assertTrue(d in response.content)
+
+    def test_link_to_requests_page(self):
+        """
+        Tests that the link to requests page is present.
+        """
+        response = self.client.get('/')
+        self.assertTrue('requests' in response.content)
