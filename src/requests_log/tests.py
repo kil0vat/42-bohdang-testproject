@@ -13,5 +13,5 @@ class SimpleTest(TestCase):
         """
         Tests that requests page exists.
         """
-        response = self.client.get('/requests')
+        response = self.client.get('/requests/')
         self.assertEqual(response.status_code, 200)
