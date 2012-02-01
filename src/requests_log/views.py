@@ -5,7 +5,7 @@ from models import RequestsLogItem
 
 
 def index(request):
-    requests = RequestsLogItem.objects.all().order_by('time')
+    requests = RequestsLogItem.objects.all().order_by('-time')[:10]
     return render_to_response(
             'requests_log.html', 
             {
