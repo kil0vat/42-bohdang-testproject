@@ -21,9 +21,7 @@ class ContactTestCase(TestCase):
         Tests that data exists in the view.
         """
         response = self.client.get('/')
-        fields_in_view = [
-                "Name",
-                "Last name",
+        field_names_in_view = [
                 "Contacts",
                 "Email",
                 "Jabber",
@@ -39,7 +37,7 @@ class ContactTestCase(TestCase):
                 "artem_dudarev",
                 "twitter"
                 ]
-        for f in fields_in_view:
+        for f in field_names_in_view:
             self.assertTrue(f in response.content)
         for d in data_in_view:
             self.assertTrue(d in response.content)
