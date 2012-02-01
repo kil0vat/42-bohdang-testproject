@@ -29,3 +29,15 @@ class SimpleTest(TestCase):
             response = self.client.get('/requests/')
         # each request is in <li> in template
         self.assertTrue(response.content.count('<li>') < 11)
+
+    def test_only_first_ten(self):
+        # delete all requests from database
+        RequestsLogItem.objects.all().delete()
+        # make first request to path /requests/first_request/ - returns 404
+        response = self.client.get('/requests/first_request/')
+        # make 10 more requests
+        number_of_requests = 10
+        for i in range(number_of_requests):
+            response = self.client.get('/requests/')
+        # make sure that the /first_request/ path is present in the list
+        self.assertTrue('/requests/first_request/' in response.content)
