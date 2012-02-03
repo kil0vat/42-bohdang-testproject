@@ -6,6 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
+from django.conf import settings
 
 
 class ContactTestCase(TestCase):
@@ -48,3 +49,11 @@ class ContactTestCase(TestCase):
         """
         response = self.client.get('/')
         self.assertTrue('requests' in response.content)
+
+    def test_author(self):
+        """
+        Tests that name meta tag exists. Name is obtained from settings.ADMIN.
+        """
+        response = self.client.get('/')
+        author = '<meta name="author" content="%s" />' % settings.ADMINS[0][0]
+        self.assertTrue(author in response.content)
