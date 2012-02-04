@@ -57,3 +57,10 @@ class ContactTestCase(TestCase):
         response = self.client.get('/')
         author = '<meta name="author" content="%s" />' % settings.ADMINS[0][0]
         self.assertTrue(author in response.content)
+
+    def test_edit_page_exists(self):
+        """
+        Test that page /edit exists.
+        """
+        response = self.client.get('/edit')
+        self.assertEqual(response.status_code, 200)
