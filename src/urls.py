@@ -1,11 +1,11 @@
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls.defaults import patterns, include
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', 'contact.views.index', name='index'),
+    ('',        include('contact.urls')),
     (r'^requests/',        include('requests_log.urls')),
 
     # Examples:

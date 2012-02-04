@@ -62,5 +62,5 @@ class ContactTestCase(TestCase):
         """
         Test that page /edit exists.
         """
-        response = self.client.get('/edit')
+        response = self.client.get('/edit/')
         self.assertEqual(response.status_code, 200)

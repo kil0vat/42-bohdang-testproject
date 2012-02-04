@@ -12,3 +12,11 @@ def index(request):
             },
             context_instance=RequestContext(request)
             )
+
+def edit_contact(request):
+    return render_to_response(
+            'edit_contact.html', 
+            {
+            },
+            context_instance=RequestContext(request)
+            )
