@@ -70,6 +70,12 @@ class ContactTestCase(TestCase):
         Test that page /edit/ redirects to /accounts/login/?next=/edit/.
         """
         response = self.client.get('/edit/', follow=True)
-        self.assertEqual(response.status_code, 200)
         last_redirect = response.redirect_chain[-1][0]
         self.assertTrue("/accounts/login/?next=/edit/" in last_redirect)
+
+    def test_redirect_from_edit_exists(self):
+        """
+        Test that page where /edit/ redirects exits.
+        """
+        response = self.client.get('/edit/', follow=True)
+        self.assertEqual(response.status_code, 200)
