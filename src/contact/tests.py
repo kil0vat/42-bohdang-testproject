@@ -60,7 +60,16 @@ class ContactTestCase(TestCase):
 
     def test_edit_page_exists(self):
         """
-        Test that page /edit exists.
+        Test that page /edit/ exists and redirects if user is not logged in.
         """
         response = self.client.get('/edit/')
+        self.assertEqual(response.status_code, 302)
+
+    def test_edit_page_redirects(self):
+        """
+        Test that page /edit/ redirects to /accounts/login/?next=/edit/.
+        """
+        response = self.client.get('/edit/', follow=True)
         self.assertEqual(response.status_code, 200)
+        last_redirect = response.redirect_chain[-1][0]
+        self.assertTrue("/accounts/login/?next=/edit/" in last_redirect)
