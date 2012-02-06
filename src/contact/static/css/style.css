@@ -9,3 +9,7 @@ table.login-form{
 .login-form td{
     padding: 0em 1em 0.5em 0em;
 }
+
+.cancel-link{
+    margin-left: 2em;
+}
