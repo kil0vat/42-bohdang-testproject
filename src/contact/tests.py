@@ -61,10 +61,7 @@ class ContactTestCase(TestCase):
         self.assertTrue(author in response.content)
 
 
-class EditContactTestCase(TestCase):
-    def setUp(self):
-        self.user = User.objects.create_user('test', 'dudarev+test@gmail.com', 'test')
-
+class EditContactTestCaseNonAuth(TestCase):
     def test_edit_page_exists(self):
         """
         Test that page /edit/ exists and redirects if user is not logged in.
@@ -87,18 +84,26 @@ class EditContactTestCase(TestCase):
         response = self.client.get('/edit/', follow=True)
         self.assertEqual(response.status_code, 200)
 
+class EditContactTestCase(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user('test', 'dudarev+test@gmail.com', 'test')
+        self.client.login(username='test', password='test')
+        self.response = self.client.get(reverse('edit_contact'))
+
     def test_user_may_login(self):
         """
         Test that a user created in setUp may login.
         """
-        self.client.login(username='test', password='test')
-        response = self.client.get(reverse('edit_contact'))
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(self.response.status_code, 200)
 
     def test_form_exists(self):
         """
-        Test that a form exists on /edit/ page
+        Test that a form exists on /edit/ page.
         """
-        self.client.login(username='test', password='test')
-        response = self.client.get(reverse('edit_contact'))
-        self.assertTrue('<form' in response.content)
+        self.assertTrue('<form' in self.response.content)
+
+    def test_cancel_button_exists(self):
+        """
+        Test that cancel button exists on /edit/ page.
+        """
+        self.assertTrue('Cancel' in self.response.content)
