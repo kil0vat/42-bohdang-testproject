@@ -5,6 +5,8 @@ when you run "manage.py test".
 Replace this with more appropriate tests for your application.
 """
 
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.conf import settings
 
@@ -58,6 +60,11 @@ class ContactTestCase(TestCase):
         author = '<meta name="author" content="%s" />' % settings.ADMINS[0][0]
         self.assertTrue(author in response.content)
 
+
+class EditContactTestCase(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user('test', 'dudarev+test@gmail.com', 'test')
+
     def test_edit_page_exists(self):
         """
         Test that page /edit/ exists and redirects if user is not logged in.
@@ -79,3 +86,19 @@ class ContactTestCase(TestCase):
         """
         response = self.client.get('/edit/', follow=True)
         self.assertEqual(response.status_code, 200)
+
+    def test_user_may_login(self):
+        """
+        Test that a user created in setUp may login.
+        """
+        self.client.login(username='test', password='test')
+        response = self.client.get(reverse('edit_contact'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_form_exists(self):
+        """
+        Test that a form exists on /edit/ page
+        """
+        self.client.login(username='test', password='test')
+        response = self.client.get(reverse('edit_contact'))
+        self.assertTrue('<form>' in response.content)
