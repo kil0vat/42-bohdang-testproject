@@ -1,7 +1,10 @@
-from models import Contact
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+
+from models import Contact
+from forms import ContactForm
 
 
 def index(request):
@@ -16,9 +19,16 @@ def index(request):
 
 @login_required
 def edit_contact(request):
-    return render_to_response(
-            'edit_contact.html', 
-            {
-            },
-            context_instance=RequestContext(request)
-            )
+    if request.method == 'POST': 
+        form = ContactForm(request.POST)
+        if form.is_valid(): 
+            # Process the data in form.cleaned_data
+            return HttpResponseRedirect('/thanks/') # Redirect after POST
+    else:
+        form = ContactForm() # An unbound form
+
+    return render_to_response('edit_contact.html', {
+        'form': form,
+        },
+        context_instance=RequestContext(request)
+        )

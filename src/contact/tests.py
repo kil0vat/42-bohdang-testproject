@@ -101,4 +101,4 @@ class EditContactTestCase(TestCase):
         """
         self.client.login(username='test', password='test')
         response = self.client.get(reverse('edit_contact'))
-        self.assertTrue('<form>' in response.content)
+        self.assertTrue('<form' in response.content)
