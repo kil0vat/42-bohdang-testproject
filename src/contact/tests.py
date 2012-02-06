@@ -10,6 +10,8 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.conf import settings
 
+from models import Contact
+
 
 class ContactTestCase(TestCase):
     def test_index(self):
@@ -107,3 +109,10 @@ class EditContactTestCase(TestCase):
         Test that cancel button exists on /edit/ page.
         """
         self.assertTrue('Cancel' in self.response.content)
+
+    def test_default_values(self):
+        """
+        Test that default values are in the form.
+        """
+        contact = Contact.objects.get(pk=1)
+        self.assertTrue(contact.skype in self.response.content)
