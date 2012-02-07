@@ -13,3 +13,7 @@ table.login-form{
 .cancel-link{
     margin-left: 2em;
 }
+
+textarea {
+  height: 90px;
+}
