@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
@@ -19,19 +20,20 @@ def index(request):
 
 @login_required
 def edit_contact(request):
+    contact = get_object_or_404(Contact, pk=1)
     if request.method == 'POST': 
-        form = ContactForm(request.POST)
+        form = ContactForm(
+                request.POST, 
+                instance=contact
+                )
         if form.is_valid(): 
             # Process the data in form.cleaned_data
-            return HttpResponseRedirect('/thanks/') # Redirect after POST
+            form.save()
+            return HttpResponseRedirect(reverse('index')) # Redirect after POST
     else:
-        contact = get_object_or_404(Contact, pk=1)
-        initial = {}
-        for field in contact._meta.fields:
-            initial[field.name] = getattr(contact, field.name)
         form = ContactForm(
-                initial=initial
-                    )
+                instance=contact
+                )
 
     return render_to_response('edit_contact.html', {
         'form': form,
