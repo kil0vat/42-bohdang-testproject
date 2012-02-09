@@ -61,7 +61,13 @@ class ContactTestCase(TestCase):
         response = self.client.get('/')
         author = '<meta name="author" content="%s" />' % settings.ADMINS[0][0]
         self.assertTrue(author in response.content)
-
+    
+    def test_login_exists(self):
+        """
+        Tests that the link to login exists.
+        """
+        response = self.client.get('/')
+        self.assertTrue('Login' in response.content)
 
 class EditContactTestCaseNonAuth(TestCase):
     def test_edit_page_exists(self):
