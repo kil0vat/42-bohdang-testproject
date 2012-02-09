@@ -9,8 +9,8 @@ from django.conf import settings
 urlpatterns = patterns('',
         ('', include('contact.urls')),
         (r'^requests/', include('requests_log.urls')),
-        (r'^accounts/login/$', login),
-        (r'^accounts/logout/$', logout),
+        url(r'^accounts/login/$', login, name='login'),
+        url(r'^accounts/logout/$', logout, name='logout'),
 
         # Examples:
         # url(r'^src/', include('src.foo.urls')),
