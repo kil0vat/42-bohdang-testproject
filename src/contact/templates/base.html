@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta name="author" content="{{SETTINGS.ADMINS.0.0}}" />
+        <meta charset="UTF-8">
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <!-- Le styles -->
+        <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+        <link href="{{ STATIC_URL }}css/bootstrap.responsive" rel="stylesheet">
+        <link href="{{ STATIC_URL }}css/style.css" rel="stylesheet">
+
+        <title>42 Coffee Cups Test Assignment - Artem Dudarev</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="span10">
+                    <h1>42 Coffee Cups Test Assignment</h1>
+                </div>
+            </div>
+            {% block content %}{% endblock %}
+            <div class="row">
+                <div class="span10">
+                    <hr>
+                    <a href="/requests">requests</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
