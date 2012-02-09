@@ -15,5 +15,10 @@ table.login-form{
 }
 
 textarea {
-  height: 90px;
+    height: 90px;
+}
+
+img{
+    margin-top: 1em;
+    margin-bottom: 2em;
 }

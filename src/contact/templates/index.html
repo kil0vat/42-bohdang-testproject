@@ -28,6 +28,9 @@
                             <p>{{contact.birth_date}}</p>
                             <p>Bio:</p>
                             <p>{{contact.bio}}</p>
+                            {% if contact.photo %}
+                            <img src="{{ MEDIA_URL }}{{ contact.photo }}" alt="photo" />
+                            {% endif %}
                         </div>
                         <div class="span5" id="second-column">
                             <p>Contacts</p>

@@ -10,3 +10,4 @@ class Contact(models.Model):
     jabber = models.EmailField()
     skype = models.CharField(max_length=30)
     other_contacts = models.TextField()
+    photo = models.ImageField(upload_to="photo", blank=True, null=True)

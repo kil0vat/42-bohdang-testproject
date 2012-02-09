@@ -24,6 +24,7 @@ def edit_contact(request):
     if request.method == 'POST': 
         form = ContactForm(
                 request.POST, 
+                request.FILES,
                 instance=contact
                 )
         if form.is_valid(): 
@@ -36,6 +37,7 @@ def edit_contact(request):
                 )
 
     return render_to_response('edit_contact.html', {
+        'contact': contact,
         'form': form,
         },
         context_instance=RequestContext(request)
