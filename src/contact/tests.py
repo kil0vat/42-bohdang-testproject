@@ -86,6 +86,7 @@ class EditContactTestCaseNonAuth(TestCase):
         response = self.client.get('/edit/', follow=True)
         self.assertEqual(response.status_code, 200)
 
+
 class EditContactTestCaseAuth(TestCase):
     def setUp(self):
         self.user = User.objects.create_user('test', 'dudarev+test@gmail.com', 'test')
