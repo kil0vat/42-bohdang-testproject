@@ -1,4 +1,5 @@
 # Django settings for src project.
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -43,10 +44,14 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 
-MEDIA_ROOT = '/home/42cc/projects/42-test-dudarev/media/'
+# media is in the same directory as `src`
+MEDIA_ROOT = os.path.join(SITE_ROOT,os.path.pardir)
+MEDIA_ROOT = os.path.join(MEDIA_ROOT,'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
