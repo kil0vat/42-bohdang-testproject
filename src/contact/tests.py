@@ -69,6 +69,16 @@ class ContactTestCase(TestCase):
         response = self.client.get('/')
         self.assertTrue('Login' in response.content)
 
+    def test_accounts_profile_redirects(self):
+        """
+        Tests that accounts/profile redirects to existing page.
+        """
+        User.objects.create_user('test', 'dudarev+test@gmail.com', 'test')
+        self.client.login(username='test', password='test')
+        response = self.client.get(reverse('profile'), follow="True")
+        self.assertEqual(response.status_code, 200)
+
+
 class EditContactTestCaseNonAuth(TestCase):
     def test_edit_page_exists(self):
         """
