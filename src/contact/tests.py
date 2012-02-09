@@ -78,6 +78,17 @@ class ContactTestCase(TestCase):
         response = self.client.get(reverse('profile'), follow="True")
         self.assertEqual(response.status_code, 200)
 
+    def test_edit_logout_when_logged_in(self):
+        """
+        Tests that 'Edit | Logout' links exist when logged in.
+        """
+        User.objects.create_user('test', 'dudarev+test@gmail.com', 'test')
+        self.client.login(username='test', password='test')
+        response = self.client.get(reverse('index'))
+        self.assertTrue('Edit' in response)
+        self.assertTrue('Logout' in response)
+        self.assertFalse('Login' in response)
+
 
 class EditContactTestCaseNonAuth(TestCase):
     def test_edit_page_exists(self):
