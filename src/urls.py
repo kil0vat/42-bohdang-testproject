@@ -9,7 +9,7 @@ from django.conf import settings
 urlpatterns = patterns('',
         ('', include('contact.urls')),
         (r'^requests/', include('requests_log.urls')),
-        (r'^accounts/login/$', login),
+        url(r'^accounts/login/$', login, name='login'),
         (r'^accounts/logout/$', logout),
 
         # Examples:
