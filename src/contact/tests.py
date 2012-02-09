@@ -85,9 +85,9 @@ class ContactTestCase(TestCase):
         User.objects.create_user('test', 'dudarev+test@gmail.com', 'test')
         self.client.login(username='test', password='test')
         response = self.client.get(reverse('index'))
-        self.assertTrue('Edit' in response)
-        self.assertTrue('Logout' in response)
-        self.assertFalse('Login' in response)
+        self.assertTrue('Logout' in response.content)
+        self.assertTrue('Edit' in response.content)
+        self.assertFalse('Login' in response.content)
 
 
 class EditContactTestCaseNonAuth(TestCase):

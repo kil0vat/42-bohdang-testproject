@@ -10,7 +10,7 @@ urlpatterns = patterns('',
         ('', include('contact.urls')),
         (r'^requests/', include('requests_log.urls')),
         url(r'^accounts/login/$', login, name='login'),
-        (r'^accounts/logout/$', logout),
+        url(r'^accounts/logout/$', logout, name='logout'),
 
         # Examples:
         # url(r'^src/', include('src.foo.urls')),
