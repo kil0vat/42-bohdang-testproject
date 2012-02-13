@@ -5,12 +5,15 @@ when you run "manage.py test".
 Replace this with more appropriate tests for your application.
 """
 
+from bs4 import BeautifulSoup as bs
+
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.conf import settings
 
 from models import Contact
+
 
 
 class ContactTestCase(TestCase):
@@ -21,6 +24,13 @@ class ContactTestCase(TestCase):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
 
+    def test_static_style_css(self):
+        """
+        Tests that style css page exists. This is to make sure that static content is served by test server where DEBUG=False
+        """
+        response = self.client.get('/static/css/style.css')
+        self.assertEqual(response.status_code, 200)
+        
     def test_index_content(self):
         """
         Tests that data exists in the view.
@@ -145,6 +155,14 @@ class EditContactTestCaseAuth(TestCase):
         contact = Contact.objects.get(pk=1)
         self.assertTrue(contact.skype in self.response.content)
 
+    def test_calendar_div(self):
+        """
+        Test that there is a calendar div for birth date (instead of just input).
+        """
+        soup = bs(self.response.content)
+        self.assertEqual(soup.find(id="id_birth_date")['type'], 'hidden')
+
+
 
 class EditContactTestCasePost(TestCase):
     def setUp(self):
@@ -188,3 +206,18 @@ class EditContactTestCasePost(TestCase):
         """
         response = self.client.post(reverse('edit_contact'), self.good_data, follow=True)
         self.assertEqual(response.status_code, 200)
+
+
+# TODO: (for future consideration)
+# include windmill tests here
+# presently with
+# $ python manage.py test_windmill
+
+"""
+import os
+from windmill.authoring import djangotest 
+
+class TestProjectWindmillTest(djangotest.WindmillDjangoUnitTest): 
+        test_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'windmilltests')
+        browser = 'firefox'
+"""
