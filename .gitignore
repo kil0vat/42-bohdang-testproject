@@ -2,4 +2,4 @@
 *.pyc
 src/db.sql
 media
-static
+/static
