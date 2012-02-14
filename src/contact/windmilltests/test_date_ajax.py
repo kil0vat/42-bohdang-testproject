@@ -4,7 +4,6 @@ from windmill.authoring import WindmillTestClient
 def test_recordingSuite0():
     client = WindmillTestClient(__name__)
 
-    client.click(id=u'first-column')
     client.click(link=u'Login')
     client.waits.forPageLoad(timeout=u'20000')
     client.type(text=u'admin', id=u'id_username')
@@ -14,6 +13,11 @@ def test_recordingSuite0():
     client.waits.forElement(link=u'Edit', timeout=u'8000')
     client.click(link=u'Edit')
     client.waits.forPageLoad(timeout=u'20000')
-    client.open(url=u'/accounts/logout/')
+    client.waits.forElement(xpath=u"//div[@id='first-column']/div[3]/div/div/table/tbody/tr[2]/td[4]", timeout=u'8000')
+    client.click(xpath=u"//div[@id='first-column']/div[3]/div/div/table/tbody/tr[2]/td[4]")
+    client.click(xpath=u"//div[@id='submit-buttons']/button")
     client.waits.forPageLoad(timeout=u'20000')
+    client.asserts.assertNode(xpath=u"//div[@id='first-column']/p[3]")
+    assert 'Aug. 10' in client.commands.getPageText()['result']
+    client.click(link=u'Logout')
     client.open(url=u'/')
