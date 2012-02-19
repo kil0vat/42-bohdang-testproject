@@ -1,1 +1,22 @@
 Test project for http://42coffeecups.com/
+
+To run tests:
+
+```bash
+make test
+```
+
+To run Windmill tests
+
+```bash
+cd src 
+python manage.py test_windmill
+```
+
+Make sure that static is collected in `static` directory (it should be in the same level as src).
+
+```bash
+python manage.py collectstatic
+```
+
+TODO: Unify Windmill and other tests in `makefile`? Possibly with different commands.

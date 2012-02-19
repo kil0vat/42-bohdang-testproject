@@ -1,8 +1,10 @@
+import json
+
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 
 from models import Contact
 from forms import ContactForm
@@ -27,10 +29,23 @@ def edit_contact(request):
                 request.FILES,
                 instance=contact
                 )
+        is_ajax_request = form.data['is_ajax_request']
         if form.is_valid(): 
             # Process the data in form.cleaned_data
             form.save()
-            return HttpResponseRedirect(reverse('index')) # Redirect after POST
+            response = json.dumps({
+                'success': True,
+                'html': 'Data is succesfully updated.'
+                })
+        else:
+            html = form.errors.as_ul()
+            response = json.dumps({'success': False, 'html': html})
+
+        if is_ajax_request:
+            return HttpResponse(response, content_type="application/javascript")
+        else:
+            if form.is_valid():
+                return HttpResponseRedirect(reverse('index')) # Redirect after POST
     else:
         form = ContactForm(
                 instance=contact
