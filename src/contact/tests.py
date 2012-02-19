@@ -163,7 +163,6 @@ class EditContactTestCaseAuth(TestCase):
         self.assertEqual(soup.find(id="id_birth_date")['type'], 'hidden')
 
 
-
 class EditContactTestCasePost(TestCase):
     def setUp(self):
         """
