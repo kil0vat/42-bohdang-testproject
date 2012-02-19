@@ -3,8 +3,11 @@
 {% block content %}
 
 <div>
-    <form enctype="multipart/form-data" method="post" action="/edit/">
+    <form id="contact-form" enctype="multipart/form-data" method="post" action="/edit/">
         {% csrf_token %}
+        <div class="hidden">
+            {{ form.is_ajax_request}}
+        </div>
         <div class="span5" id="first-column">
             {{ form.non_field_errors }}
             <div class="fieldWrapper">
@@ -69,6 +72,32 @@
             <a href="/" class="cancel-link">Cancel</a>
         </div>
     </form>
+</div>
+
+<div class="modal" id="response-modal-success" style="display:none;">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Success</h3>
+    </div>
+    <div class="modal-body">
+        <p id="response-message-success"></p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">OK</a>
+    </div>
+</div>
+
+<div class="modal" id="response-modal-error" style="display:none;">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Error</h3>
+    </div>
+    <div class="modal-body">
+        <p id="response-message-error"></p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">OK</a>
+    </div>
 </div>
 
 {% endblock %}
