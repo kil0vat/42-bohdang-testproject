@@ -153,7 +153,7 @@ class EditContactTestCaseAuth(TestCase):
         Test that default values are in the form.
         """
         contact = Contact.objects.get(pk=1)
-        self.assertTrue(contact.skype in self.response.content)
+        self.assertTrue(self.response.content.decode('utf8').find(contact.skype) >= 0)
 
     def test_calendar_div(self):
         """
