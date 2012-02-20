@@ -153,7 +153,7 @@ class EditContactTestCaseAuth(TestCase):
         Test that default values are in the form.
         """
         contact = Contact.objects.get(pk=1)
-        self.assertTrue(contact.skype in self.response.content)
+        self.assertTrue(self.response.content.decode('utf8').find(contact.skype) >= 0)
 
     def test_calendar_div(self):
         """
@@ -161,6 +161,15 @@ class EditContactTestCaseAuth(TestCase):
         """
         soup = bs(self.response.content)
         self.assertEqual(soup.find(id="id_birth_date")['type'], 'hidden')
+
+    def test_form_fields_order(self):
+        """
+        Test the order of fields in the form.
+        """
+        fields_order_list = ["Bio", "Date of birth", "Last name", "First name", "Other contacts", "Skype", "Jabber", "Email",]
+        positions = [self.response.content.decode('utf8').find(f) for f in fields_order_list]
+        # it's OK to do it this way here since the list is small
+        self.assertTrue(positions == sorted(positions))
 
 
 class EditContactTestCasePost(TestCase):
@@ -171,6 +180,7 @@ class EditContactTestCasePost(TestCase):
         self.user = User.objects.create_user('test', 'dudarev+test@gmail.com', 'test')
         self.client.login(username='test', password='test')
         self.good_data = {
+                "is_ajax_request": 0,
                 "bio": "Artem was born in Donetsk", 
                 "first_name": "Artem",
                 "last_name": "Dudarev", 

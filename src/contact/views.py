@@ -29,7 +29,7 @@ def edit_contact(request):
                 request.FILES,
                 instance=contact
                 )
-        is_ajax_request = form.data['is_ajax_request']
+        is_ajax_request = form.data.get('is_ajax_request',0)
         if form.is_valid(): 
             # Process the data in form.cleaned_data
             form.save()
