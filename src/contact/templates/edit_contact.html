@@ -11,9 +11,14 @@
         <div class="span5" id="first-column">
             {{ form.non_field_errors }}
             <div class="fieldWrapper">
-                {{ form.first_name.errors }}
-                <label for="id_first_name">First name:</label>
-                {{ form.first_name}}
+                {{ form.bio.errors }}
+                <label for="id_bio">Bio:</label>
+                {{ form.bio}}
+            </div>
+            <div class="fieldWrapper">
+                {{ form.birth_date.errors }}
+                <label for="id_birth_date">Date of birth:</label>
+                {{ form.birth_date}}
             </div>
             <div class="fieldWrapper">
                 {{ form.last_name.errors }}
@@ -21,9 +26,9 @@
                 {{ form.last_name}}
             </div>
             <div class="fieldWrapper">
-                {{ form.birth_date.errors }}
-                <label for="id_birth_date">Date of birth:</label>
-                {{ form.birth_date}}
+                {{ form.first_name.errors }}
+                <label for="id_first_name">First name:</label>
+                {{ form.first_name}}
             </div>
             <div class="fieldWrapper">
                 {{ form.photo.errors }}
@@ -39,16 +44,10 @@
             </div>
         </div>
         <div class="span5" id="second-column">
-            {{ form.non_field_errors }}
             <div class="fieldWrapper">
-                {{ form.email.errors }}
-                <label for="id_email">Email:</label>
-                {{ form.email}}
-            </div>
-            <div class="fieldWrapper">
-                {{ form.jabber.errors }}
-                <label for="id_jabber">Jabber:</label>
-                {{ form.jabber}}
+                {{ form.other_contacts.errors }}
+                <label for="id_other_contacts">Other contacts:</label>
+                {{ form.other_contacts}}
             </div>
             <div class="fieldWrapper">
                 {{ form.skype.errors }}
@@ -56,14 +55,14 @@
                 {{ form.skype}}
             </div>
             <div class="fieldWrapper">
-                {{ form.other_contacts.errors }}
-                <label for="id_other_contacts">Other contacts:</label>
-                {{ form.other_contacts}}
+                {{ form.jabber.errors }}
+                <label for="id_jabber">Jabber:</label>
+                {{ form.jabber}}
             </div>
             <div class="fieldWrapper">
-                {{ form.bio.errors }}
-                <label for="id_bio">Bio:</label>
-                {{ form.bio}}
+                {{ form.email.errors }}
+                <label for="id_email">Email:</label>
+                {{ form.email}}
             </div>
         </div>
 
