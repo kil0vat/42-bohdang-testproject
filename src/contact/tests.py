@@ -107,6 +107,16 @@ class ContactTestCase(TestCase):
         response = self.client.get(reverse('index'))
         self.assertTrue('(admin)' in response.content)
 
+    def test_admin_links_to_correct_page(self):
+        """
+        Tests that admin links to page that edits user.
+        """
+        User.objects.create_user('test', 'dudarev+test@gmail.com', 'test')
+        self.client.login(username='test', password='test')
+        response = self.client.get(reverse('index'))
+        soup = bs(response.content)
+        self.assertEqual(soup.find(id="admin_link")['href'], '/admin/auth/user/1/')
+
 
 class EditContactTestCaseNonAuth(TestCase):
     def test_edit_page_exists(self):
