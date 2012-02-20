@@ -15,7 +15,6 @@ from django.conf import settings
 from models import Contact
 
 
-
 class ContactTestCase(TestCase):
     def test_index(self):
         """
@@ -98,6 +97,15 @@ class ContactTestCase(TestCase):
         self.assertTrue('Logout' in response.content)
         self.assertTrue('Edit' in response.content)
         self.assertFalse('Login' in response.content)
+
+    def test_link_to_admin_when_logged_in(self):
+        """
+        Tests that link to admin exists.
+        """
+        User.objects.create_user('test', 'dudarev+test@gmail.com', 'test')
+        self.client.login(username='test', password='test')
+        response = self.client.get(reverse('index'))
+        self.assertTrue('(admin)' in response.content)
 
 
 class EditContactTestCaseNonAuth(TestCase):
