@@ -171,6 +171,7 @@ class EditContactTestCasePost(TestCase):
         self.user = User.objects.create_user('test', 'dudarev+test@gmail.com', 'test')
         self.client.login(username='test', password='test')
         self.good_data = {
+                "is_ajax_request": 0,
                 "bio": "Artem was born in Donetsk", 
                 "first_name": "Artem",
                 "last_name": "Dudarev", 
