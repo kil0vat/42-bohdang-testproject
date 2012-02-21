@@ -111,8 +111,8 @@ class ContactTestCase(TestCase):
         """
         Tests that admin links to page that edits user.
         """
-        User.objects.create_user('test', 'dudarev+test@gmail.com', 'test')
-        self.client.login(username='test', password='test')
+        # this user is loaded from fixture and for sure has pk=1
+        self.client.login(username='admin', password='admin')
         response = self.client.get(reverse('index'))
         soup = bs(response.content)
         self.assertEqual(soup.find(id="admin_link")['href'], '/admin/auth/user/1/')
