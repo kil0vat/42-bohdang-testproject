@@ -23,13 +23,13 @@
                     <h1>42 Coffee Cups Test Assignment</h1>
                     <div class="row">
                         <div class="span5" id="first-column">
-                            <p>{{contact.first_name}}</p>
-                            <p>{{contact.last_name}}</p>
-                            <p>{{contact.birth_date}}</p>
+                            <p>{{contact.person.first_name}}</p>
+                            <p>{{contact.person.last_name}}</p>
+                            <p>{{contact.person.birth_date}}</p>
                             <p>Bio:</p>
-                            <p>{{contact.bio}}</p>
-                            {% if contact.photo %}
-                            <img src="{{ MEDIA_URL }}{{ contact.photo }}" alt="photo" />
+                            <p>{{contact.person.bio}}</p>
+                            {% if contact.person.photo %}
+                            <img src="{{ MEDIA_URL }}{{ contact.person.photo }}" alt="photo" />
                             {% endif %}
                         </div>
                         <div class="span5" id="second-column">
