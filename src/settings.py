@@ -135,10 +135,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'contact',
     'requests_log',
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'count_models',
 )
 
 # A sample logging configuration. The only tangible logging
