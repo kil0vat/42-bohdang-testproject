@@ -4,7 +4,7 @@ from django.db import models
 class Person(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    birth_date = models.DateField()
+    birth_date = models.DateField(verbose_name="Date of birth")
     bio = models.TextField()
     photo = models.ImageField(upload_to="photo", blank=True, null=True)
 

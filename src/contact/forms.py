@@ -10,9 +10,22 @@ class PersonForm(ModelForm):
         widgets = {
                 'birth_date': CalendarAJAXInput(),
                 }
+        fields = (
+                'bio',
+                'birth_date',
+                'last_name',
+                'first_name',
+                'photo',
+                )
 
 class ContactForm(ModelForm):
     class Meta:
         model = Contact
+        fields = (
+                'other_contacts', 
+                'skype', 
+                'jabber', 
+                'email',
+                )
         exclude = ('person',)
 
