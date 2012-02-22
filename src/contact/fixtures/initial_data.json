@@ -1,17 +1,24 @@
 [
 {
     "pk": 1, 
-    "model": "contact.contact", 
+    "model": "contact.person", 
     "fields": {
         "bio": "Artem was born in Donetsk,  lived in Baikonur, Sevastopol, Dolgoprudnyi, Austin, Dresden,  and now is working from Donetsk.\n", 
         "first_name": "Artem", 
         "last_name": "Dudarev", 
+        "birth_date": "1978-08-07", 
+        "photo": null
+    }
+},
+{
+    "pk": 1, 
+    "model": "contact.contact", 
+    "fields": {
+        "person": 1,
         "other_contacts": "http://twitter.com/dudarev\n", 
         "skype": "artem_dudarev", 
-        "birth_date": "1978-08-07", 
         "jabber": "dudarev@gmail.com", 
-        "email": "dudarev@gmail.com",
-        "photo": null
+        "email": "dudarev@gmail.com"
     }
 },
 {
