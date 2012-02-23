@@ -6,6 +6,7 @@ class RequestsLogItem(models.Model):
     path = models.CharField(max_length=2048)
     method = models.CharField(max_length=4)
     META = models.TextField()
+    priority = models.IntegerField(default=1)
     
     def __unicode__(self):
         return u'%s' % (self.time)
