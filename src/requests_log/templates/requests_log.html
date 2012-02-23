@@ -1,26 +1,53 @@
 {% extends "base.html" %}
 
+{% block js %}
+
+        <script type ="text/javascript" src="{{ STATIC_URL }}js/list.min.js"></script>
+        <script type ="text/javascript" src="{{ STATIC_URL }}js/requests.js"></script>
+        
+{% endblock %}
+
 {% block content %}
 
-<table>
-    <thead>
-        <tr>
-            <th class="sort" data-sort="time">Time</th>
-            <th class="sort" data-sort="path">Path</th>
-            <th class="sort" data-sort="method">Method</th>
-            <th class="sort" data-sort="priority">Priority</th>
-        </tr>
-    </thead>
-    <tbody class="list">
-        {% for r in requests %}
-        <tr>
-            <td class="time">{{ r.time }}</td>
-            <td class="path">{{ r.path }}</td>
-            <td class="method">{{ r.method }}</td>
-            <td class="method">{{ r.priority}}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-<table>
+<p>
+<ul>
+    <li>Click titles of the table to sort. Another click to reverse.</li>
+    <li>Click 'Toggle' next to an item to togle priority values between 1 and 0.</li>
+    <li>Click filters below to filter requests by priority.</li>
+</ul>
+</p>
+
+<div id="requests">
+    <table>
+        <thead>
+            <tr>
+                <th><a class="sort" data-sort="time" href="#">Time</a></th>
+                <th><a class="sort" data-sort="path" href="#">Path</a></th>
+                <th><a class="sort" data-sort="method" href="#">Method</a></th>
+                <th><a class="sort" data-sort="priority" href="#">Priority</a></th>
+                <th>Toggle Priority</th>
+            </tr>
+        </thead>
+        <tbody class="list">
+            {% for r in requests %}
+            <tr>
+                <td class="id" style="display:none;">{{ r.id }}</td>
+                <td class="time">{{ r.time }}</td>
+                <td class="path">{{ r.path }}</td>
+                <td class="method">{{ r.method }}</td>
+                <td class="priority">{{ r.priority}}</td>
+                <td class="toggle"><a class="update-priority" href="#" data-id="{{ r.id }}">Toggle</a></td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div id="filters">
+<a href="#" id="filter-1">Filter 1</a>
+<a href="#" id="filter-0">Filter 0</a>
+<a href="#" id="show-all">Show all</a>
+</div>
 
 {% endblock %}
