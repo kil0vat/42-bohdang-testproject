@@ -1,9 +1,26 @@
-<ul>
-    {% for r in requests %}
-    <li>
-    {{ r.time }}
-    {{ r.path }}
-    {{ r.method }}
-    </li>
-    {% endfor %}
-</ul>
+{% extends "base.html" %}
+
+{% block content %}
+
+<table>
+    <thead>
+        <tr>
+            <th class="sort" data-sort="time">Time</th>
+            <th class="sort" data-sort="path">Path</th>
+            <th class="sort" data-sort="method">Method</th>
+            <th class="sort" data-sort="priority">Priority</th>
+        </tr>
+    </thead>
+    <tbody class="list">
+        {% for r in requests %}
+        <tr>
+            <td class="time">{{ r.time }}</td>
+            <td class="path">{{ r.path }}</td>
+            <td class="method">{{ r.method }}</td>
+            <td class="method">{{ r.priority}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+<table>
+
+{% endblock %}

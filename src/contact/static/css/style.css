@@ -26,3 +26,7 @@ img{
 #login-holder{
     text-align: right;
 }
+
+td, th{
+    padding-right: 2em
+}
