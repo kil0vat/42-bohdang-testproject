@@ -26,3 +26,15 @@ img{
 #login-holder{
     text-align: right;
 }
+
+td, th{
+    padding-right: 2em
+}
+
+#filters{
+    margin-top: 2em
+}
+
+#filters a{
+    margin-right: 2em
+}
