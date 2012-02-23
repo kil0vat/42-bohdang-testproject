@@ -3,7 +3,7 @@ from django.test import TestCase
 from models import RequestsLogItem
 
 
-class SimpleTest(TestCase):
+class RequestsLogTest(TestCase):
     def test_requests_page_exists(self):
         """
         Tests that requests page exists.
@@ -41,3 +41,12 @@ class SimpleTest(TestCase):
             response = self.client.get('/requests/')
         # make sure that the /first_request/ path is present in the list
         self.assertTrue('/requests/first_request/' in response.content)
+
+    def test_request_has_default_priority(self):
+        r = RequestsLogItem(
+                path='/',
+                method='GET',
+                META=''
+                )
+        r.save()
+        self.assertEqual(r.priority, 1)
