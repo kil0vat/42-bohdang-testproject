@@ -1,5 +1,6 @@
 *.swp
 *.pyc
 src/db.sql
+src/*.dat
 media
 /static
