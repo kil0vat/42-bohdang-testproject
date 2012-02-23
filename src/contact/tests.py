@@ -12,8 +12,9 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.conf import settings
 
-from models import Contact, Person
+from models import Contact, Person, Update
 
+from requests_log.models import RequestsLogItem
 
 class ContactTestCase(TestCase):
     def test_index(self):
@@ -234,6 +235,61 @@ class EditContactTestCasePost(TestCase):
         response = self.client.post(reverse('edit_contact'), self.good_data, follow=True)
         self.assertEqual(response.status_code, 200)
 
+
+class SignalsTestCase(TestCase):
+    def test_contact_update(self):
+        contact = Contact.objects.get(pk=1)
+        contact.name = "Another name"
+        contact.save()
+        updates = Update.objects.filter(update_type='U').filter(model_name='Contact')
+        self.assertTrue(len(updates) > 0)
+
+    def test_contact_create(self):
+        p = Person.objects.get(pk=1)
+        c = Contact(
+                person=p,
+                email='test@example.com',
+                jabber='test@example.com',
+                skype='test',
+                other_contacts='test, test'
+                )
+        c.save()
+        updates = Update.objects.filter(update_type='C').filter(model_name='Contact')
+        self.assertTrue(len(updates) > 0)
+
+    def test_contact_delete(self):
+        p = Person.objects.get(pk=1)
+        c = Contact(
+                person=p,
+                email='test@example.com',
+                jabber='test@example.com',
+                skype='test',
+                other_contacts='test, test'
+                )
+        c.save()
+        c.delete()
+        updates = Update.objects.filter(update_type='D').filter(model_name='Contact')
+        self.assertTrue(len(updates) > 0)
+
+    def test_request_log_item_create(self):
+        self.client.get('/')
+        updates = Update.objects.filter(model_name='RequestsLogItem').filter(update_type='C')
+        self.assertTrue(len(updates) > 0)
+
+    def test_request_log_item_update(self):
+        self.client.get('/')
+        r = RequestsLogItem.objects.all()[0]
+        r.test_path = '/test/'
+        r.save()
+        updates = Update.objects.filter(model_name='RequestsLogItem').filter(update_type='U')
+        self.assertTrue(len(updates) > 0)
+
+    def test_request_log_item_delete(self):
+        self.client.get('/')
+        r = RequestsLogItem.objects.all()[0]
+        r.delete()
+        updates = Update.objects.filter(model_name='RequestsLogItem').filter(update_type='D')
+        self.assertTrue(len(updates) > 0)
 
 # TODO: (for future consideration)
 # include windmill tests here
