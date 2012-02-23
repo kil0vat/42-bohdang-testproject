@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $('#id_birth_date').jdPicker({
+    $('#id_person-birth_date').jdPicker({
         date_format: "YYYY-mm-dd"
     });
 }); 
@@ -17,7 +17,7 @@ $(document).ready(function() {
 // pre-submit callback 
 function showRequest(formData, jqForm, options) { 
     // set is_ajax_request field value to 1
-    $("input[name='is_ajax_request']").val(1);
+    $("input[name='person-is_ajax_request']").val(1);
     options = {
         backdrop: 'static'
     }

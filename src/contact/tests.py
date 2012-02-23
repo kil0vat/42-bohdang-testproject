@@ -12,7 +12,7 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.conf import settings
 
-from models import Contact
+from models import Contact, Person
 
 
 class ContactTestCase(TestCase):
@@ -178,7 +178,7 @@ class EditContactTestCaseAuth(TestCase):
         Test that there is a calendar div for birth date (instead of just input).
         """
         soup = bs(self.response.content)
-        self.assertEqual(soup.find(id="id_birth_date")['type'], 'hidden')
+        self.assertEqual(soup.find(id="id_person-birth_date")['type'], 'hidden')
 
     def test_form_fields_order(self):
         """
@@ -198,15 +198,15 @@ class EditContactTestCasePost(TestCase):
         self.user = User.objects.create_user('test', 'dudarev+test@gmail.com', 'test')
         self.client.login(username='test', password='test')
         self.good_data = {
-                "is_ajax_request": 0,
-                "bio": "Artem was born in Donetsk", 
-                "first_name": "Artem",
-                "last_name": "Dudarev", 
-                "other_contacts": "http://twitter.com/dudarev", 
-                "skype": "artem_dudarev", 
-                "birth_date": "1978-08-07", 
-                "jabber": "dudarev@gmail.com", 
-                "email": "dudarev@gmail.com"
+                "person-is_ajax_request": 0,
+                "person-bio": "Artem was born in Donetsk", 
+                "person-first_name": "Artem",
+                "person-last_name": "Dudarev", 
+                "contact-other_contacts": "http://twitter.com/dudarev", 
+                "contact-skype": "artem_dudarev", 
+                "person-birth_date": "1978-08-07", 
+                "contact-jabber": "dudarev@gmail.com", 
+                "contact-email": "dudarev@gmail.com"
                 }
 
     def test_send_no_data(self):
@@ -215,17 +215,17 @@ class EditContactTestCasePost(TestCase):
         """
         response = self.client.post(reverse('edit_contact'))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['form']['first_name'].errors, [u'This field is required.'])
+        self.assertEqual(response.context['form_person']['first_name'].errors, [u'This field is required.'])
 
     def test_send_good_data_updates(self):
         """
         Test that when good data is sent contact is updated.
         """
         test_name = "Another Name"
-        self.good_data['first_name'] = test_name
+        self.good_data['person-first_name'] = test_name
         self.client.post(reverse('edit_contact'), self.good_data)
-        contact = Contact.objects.get(pk=1)
-        self.assertEqual(contact.first_name, test_name)
+        person = Person.objects.get(pk=1)
+        self.assertEqual(person.first_name, test_name)
 
     def test_send_good_data_redirects(self):
         """
