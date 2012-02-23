@@ -21,7 +21,7 @@ class RequestsLogTest(TestCase):
     def test_requests_appear(self):
         response = self.client.get('/requests/')
         # each request is in <li> in template
-        self.assertTrue('<li>' in response.content)
+        self.assertTrue('<td>' in response.content)
 
     def test_no_more_than_ten(self):
         number_of_requests = 11
