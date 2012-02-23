@@ -69,7 +69,9 @@ class RequestsLogTest(TestCase):
                     {
                         'id':1,
                         'priority': new_priority
-                    })
+                    },
+                    **{'HTTP_X_REQUESTED_WITH': 'XMLHttpRequest'}
+                    )
             r = RequestsLogItem.objects.get(pk=1)
             self.assertEqual(r.priority,new_priority)
         new_priority = 0
