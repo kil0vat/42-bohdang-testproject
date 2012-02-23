@@ -44,7 +44,6 @@ def update_callback(sender, **kwargs):
     if model_name == 'Update':
         return
     update_type = 'C' if kwargs.get('created', False) else 'U'
-    print kwargs
     u = Update(update_type=update_type, model_name=model_name)
     u.save()
 
