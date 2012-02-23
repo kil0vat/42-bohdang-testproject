@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.core.urlresolvers import reverse
 
 from models import RequestsLogItem
 
@@ -20,8 +21,8 @@ class RequestsLogTest(TestCase):
 
     def test_requests_appear(self):
         response = self.client.get('/requests/')
-        # each request is in <li> in template
-        self.assertTrue('<td>' in response.content)
+        # each request is in <td> in template
+        self.assertTrue('<td' in response.content)
 
     def test_no_more_than_ten(self):
         number_of_requests = 11
@@ -50,3 +51,28 @@ class RequestsLogTest(TestCase):
                 )
         r.save()
         self.assertEqual(r.priority, 1)
+
+    def test_update_priority(self):
+        # check that pk=1 exists, if not - create
+        try:
+            r = RequestsLogItem.objects.get(pk=1)
+        except:
+            r = RequestsLogItem(
+                    pk=1,
+                    path='/',
+                    method='GET',
+                    META=''
+                    )
+            r.save()
+        def assertPriorityUpdate(self, new_priority):
+            self.client.post(reverse('update_priority'), 
+                    {
+                        'id':1,
+                        'priority': new_priority
+                    })
+            r = RequestsLogItem.objects.get(pk=1)
+            self.assertEqual(r.priority,new_priority)
+        new_priority = 0
+        assertPriorityUpdate(self, new_priority)
+        new_priority = 1
+        assertPriorityUpdate(self, new_priority)
